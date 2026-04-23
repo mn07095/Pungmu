@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>풍무농산</title>
   <style>
-    @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
-    @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&display=swap");
+    @import url("https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css");
+    @import url("https://fonts.googleapis.com/css2?family=Song+Myung&display=swap");
 
     :root {
       --ink: #080d0b;
@@ -28,7 +28,7 @@
       margin: 0;
       min-width: 320px;
       color: var(--ink);
-      font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "SUIT Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: #edf1ec;
       letter-spacing: 0;
     }
@@ -79,16 +79,16 @@
       text-align: center;
     }
     .brand-name {
-      font-family: "Noto Serif KR", serif;
-      font-size: 24px;
-      font-weight: 900;
+      font-family: "Song Myung", serif;
+      font-size: 25px;
+      font-weight: 400;
       letter-spacing: 0;
     }
     .branch {
       margin-top: 4px;
       color: var(--teal);
       font-size: 13px;
-      font-weight: 900;
+      font-weight: 800;
     }
     .tools {
       justify-self: end;
@@ -136,6 +136,37 @@
       box-shadow: 0 8px 18px rgba(7, 95, 85, .18);
     }
     .date.active span { color: rgba(255,255,255,.74); }
+
+    .delivery-banner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 18px;
+      background: #f2f8f4;
+      border-bottom: 1px solid var(--line);
+    }
+    .delivery-banner b {
+      display: block;
+      font-size: 16px;
+      font-weight: 900;
+    }
+    .delivery-banner span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .delivery-tag {
+      padding: 8px 10px;
+      border-radius: 999px;
+      color: #fff;
+      background: #607b2f;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
 
     .notice {
       display: grid;
@@ -238,16 +269,6 @@
       background: rgba(3, 63, 56, .88);
       font-size: 11px;
       font-weight: 950;
-    }
-    .sale {
-      position: absolute;
-      right: 8px;
-      bottom: 8px;
-      z-index: 1;
-      color: #fff;
-      font-size: 23px;
-      font-weight: 950;
-      text-shadow: 0 2px 8px rgba(0,0,0,.3);
     }
     .product h2 {
       margin: -2px 0 6px;
@@ -526,7 +547,7 @@
         <div class="branch">- 풍무점 -</div>
       </div>
       <div class="tools">
-        <button class="icon-btn" type="button" aria-label="검색">
+        <button class="icon-btn" type="button" aria-label="검색" id="searchButton">
           <svg width="27" height="27" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m21 21-4.3-4.3M10.8 18.2a7.4 7.4 0 1 1 0-14.8 7.4 7.4 0 0 1 0 14.8Z" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg>
         </button>
         <button class="icon-btn" type="button" aria-label="장바구니" id="cartButton">
@@ -544,9 +565,17 @@
     <section class="notice">
       <div>
         <b>오늘 들어온 신선 상품</b>
-        <span>12:00 ~ 20:00 매장 수령 가능</span>
+        <span>아라동 한정 배달로 받아보세요</span>
       </div>
-      <div class="notice-pill">소량입고</div>
+      <div class="notice-pill">당일배송</div>
+    </section>
+
+    <section class="delivery-banner">
+      <div>
+        <b>아라동 배달 전용</b>
+        <span>주문 확인 후 순차 배달 · 매장 픽업 없음</span>
+      </div>
+      <div class="delivery-tag">아라동만</div>
     </section>
 
     <nav class="category-strip" aria-label="상품 카테고리">
@@ -575,78 +604,16 @@
 
   <script>
     const products = [
-      {
-        id: "strawberry",
-        category: "fruit",
-        badge: "담양 산지",
-        name: "담양 설향딸기 600g",
-        price: 7900,
-        stock: 18,
-        sold: 2946,
-        limit: 3,
-        img: "https://images.pexels.com/photos/17616208/pexels-photo-17616208.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop",
-        desc: "향이 진하고 과육이 단단한 설향 딸기입니다.\n무른 과일이라 당일 픽업을 권장합니다."
-      },
-      {
-        id: "tomato",
-        category: "fruit",
-        badge: "오늘 입고",
-        name: "대추방울토마토 750g",
-        price: 5900,
-        stock: 25,
-        sold: 9616,
-        limit: 4,
-        img: "https://images.pexels.com/photos/29037015/pexels-photo-29037015.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop",
-        desc: "껍질이 얇고 단맛이 좋은 대추방울토마토입니다.\n샐러드와 도시락 간식으로 좋아요."
-      },
-      {
-        id: "orange",
-        category: "fruit",
-        badge: "고당도",
-        name: "캘리포니아 오렌지 6과",
-        price: 6900,
-        stock: 16,
-        sold: 1842,
-        limit: 3,
-        img: "https://images.pexels.com/photos/15722576/pexels-photo-15722576.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop",
-        desc: "수분감 좋은 오렌지 6과 묶음입니다.\n새콤달콤한 과일을 찾는 분께 추천합니다."
-      },
-      {
-        id: "lettuce",
-        category: "veg",
-        badge: "쌈채소",
-        name: "쌈채소 모둠 한 팩",
-        price: 4500,
-        stock: 22,
-        sold: 1574,
-        limit: 5,
-        img: "https://images.pexels.com/photos/28768309/pexels-photo-28768309.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop",
-        desc: "고기와 함께 먹기 좋은 쌈채소 모둠입니다.\n입고 물량 중 싱싱한 잎만 골라 담았습니다."
-      },
-      {
-        id: "zucchini",
-        category: "veg",
-        badge: "국내산",
-        name: "애호박 2입",
-        price: 3900,
-        stock: 17,
-        sold: 928,
-        limit: 5,
-        img: "https://images.pexels.com/photos/29560751/pexels-photo-29560751.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop",
-        desc: "찌개와 볶음에 쓰기 좋은 국내산 애호박입니다.\n표면이 단단한 물량으로 준비했습니다."
-      },
-      {
-        id: "paprika",
-        category: "today",
-        badge: "오늘특가",
-        name: "파프리카 혼합 3입",
-        price: 4900,
-        stock: 13,
-        sold: 1105,
-        limit: 4,
-        img: "https://images.pexels.com/photos/31979013/pexels-photo-31979013.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop",
-        desc: "색감 좋은 파프리카 혼합 3입입니다.\n샐러드와 볶음용으로 활용하기 좋습니다."
-      }
+      { id: "strawberry", category: "fruit", badge: "담양 산지", name: "담양 설향딸기 600g", price: 7900, stock: 18, sold: 2946, limit: 3, img: "https://images.pexels.com/photos/17616208/pexels-photo-17616208.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "향이 진하고 과육이 단단한 설향 딸기입니다.\n아라동 주문은 당일 순차 배달됩니다." },
+      { id: "tomato", category: "fruit", badge: "오늘 입고", name: "대추방울토마토 750g", price: 5900, stock: 25, sold: 9616, limit: 4, img: "https://images.pexels.com/photos/29037015/pexels-photo-29037015.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "껍질이 얇고 단맛이 좋은 대추방울토마토입니다.\n샐러드와 도시락 간식으로 좋아요." },
+      { id: "apple", category: "fruit", badge: "아삭", name: "가정용 혼합사과 2kg", price: 9900, stock: 14, sold: 1728, limit: 3, img: "https://images.pexels.com/photos/19583770/pexels-photo-19583770.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "크기는 조금 달라도 맛 좋은 가정용 사과입니다.\n아라동 한정 배달 상품입니다." },
+      { id: "orange", category: "fruit", badge: "고당도", name: "캘리포니아 오렌지 6과", price: 6900, stock: 16, sold: 1842, limit: 3, img: "https://images.pexels.com/photos/15722576/pexels-photo-15722576.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "수분감 좋은 오렌지 6과 묶음입니다.\n새콤달콤한 과일을 찾는 분께 추천합니다." },
+      { id: "grape", category: "fruit", badge: "달콤", name: "씨없는 청포도 500g", price: 8900, stock: 12, sold: 1320, limit: 2, img: "https://images.pexels.com/photos/708777/pexels-photo-708777.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "껍질째 먹기 좋은 씨없는 청포도입니다.\n냉장 보관 후 차갑게 드시면 더 좋아요." },
+      { id: "lettuce", category: "veg", badge: "쌈채소", name: "쌈채소 모둠 한 팩", price: 4500, stock: 22, sold: 1574, limit: 5, img: "https://images.pexels.com/photos/28768309/pexels-photo-28768309.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "고기와 함께 먹기 좋은 쌈채소 모둠입니다.\n싱싱한 잎만 골라 담았습니다." },
+      { id: "cucumber", category: "veg", badge: "시원", name: "백오이 3입", price: 3500, stock: 28, sold: 2034, limit: 5, img: "https://images.pexels.com/photos/2329440/pexels-photo-2329440.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "무침과 샐러드에 좋은 백오이 3입입니다.\n단단하고 신선한 물량으로 준비했습니다." },
+      { id: "carrot", category: "veg", badge: "국내산", name: "흙당근 1kg", price: 4200, stock: 19, sold: 1184, limit: 4, img: "https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "요리용으로 쓰기 좋은 국내산 흙당근입니다.\n세척 후 냉장 보관해주세요." },
+      { id: "zucchini", category: "veg", badge: "국내산", name: "애호박 2입", price: 3900, stock: 17, sold: 928, limit: 5, img: "https://images.pexels.com/photos/29560751/pexels-photo-29560751.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "찌개와 볶음에 쓰기 좋은 국내산 애호박입니다.\n표면이 단단한 물량으로 준비했습니다." },
+      { id: "paprika", category: "today", badge: "오늘특가", name: "파프리카 혼합 3입", price: 4900, stock: 13, sold: 1105, limit: 4, img: "https://images.pexels.com/photos/31979013/pexels-photo-31979013.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "색감 좋은 파프리카 혼합 3입입니다.\n샐러드와 볶음용으로 활용하기 좋습니다." }
     ];
 
     const cart = new Map();
@@ -674,13 +641,12 @@
             <div class="product-main">
               <div class="photo" style="background-image:url('${item.img}')" aria-hidden="true">
                 <span class="label">${item.badge}</span>
-                <span class="sale">${item.price.toLocaleString("ko-KR")}</span>
               </div>
               <div>
                 <h2>${item.name}</h2>
                 <div class="price">가격: <b>${money(item.price)}</b></div>
                 <div class="stock">${item.stock}개 남았어요!</div>
-                <div class="meta">누적판매수량: ${item.sold.toLocaleString("ko-KR")}<br>12:00 ~ 20:00 수령 가능</div>
+                <div class="meta">누적판매수량: ${item.sold.toLocaleString("ko-KR")}<br>아라동 한정 배달 가능</div>
               </div>
             </div>
             <div class="actions">
@@ -746,15 +712,26 @@
         </div>
         <div class="field"><label for="name">고객명 *</label><input class="input" id="name" autocomplete="name" placeholder="이름을 입력하세요"></div>
         <div class="field"><label for="phone">전화번호 *</label><input class="input" id="phone" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000"></div>
-        <div class="field">
-          <label>수령 방식</label>
-          <div class="radio-row">
-            <label><input type="radio" name="receive" checked> 픽업</label>
-            <label><input type="radio" name="receive"> 배송 문의</label>
-          </div>
-        </div>
-        <div class="field"><label for="memo">요청사항</label><textarea class="input" id="memo" rows="3" placeholder="예: 7시에 찾으러 갈게요"></textarea></div>
+        <div class="field"><label for="address">아라동 배달 주소 *</label><input class="input" id="address" autocomplete="street-address" placeholder="아라동 상세 주소를 입력하세요"></div>
+        <div class="field"><label for="memo">요청사항</label><textarea class="input" id="memo" rows="3" placeholder="예: 문 앞에 놓아주세요"></textarea></div>
         <button class="submit" type="button" data-submit ${items.length ? "" : "disabled"}>주문 접수하기</button>
+      `;
+    }
+
+    function searchSheet() {
+      return `
+        <div class="sheet-head">
+          <h2>상품 검색</h2>
+          <button class="close" type="button" data-close aria-label="닫기">×</button>
+        </div>
+        <div class="field" style="margin-top:0">
+          <label for="searchInput">상품명</label>
+          <input class="input" id="searchInput" placeholder="예: 딸기, 오이, 사과">
+        </div>
+        <div class="summary" style="margin-top:12px">
+          <div class="summary-line"><span>추천 검색어</span><b>딸기 · 오이 · 당근</b></div>
+          <div class="summary-line"><span>배달 가능 지역</span><b>아라동</b></div>
+        </div>
       `;
     }
 
@@ -777,9 +754,9 @@
           <button class="close" type="button" data-close aria-label="닫기">×</button>
         </div>
         <div class="summary">
-          <div class="summary-line"><span>매장명</span><b>풍무농산 풍무점</b></div>
-          <div class="summary-line"><span>수령</span><b>12:00 ~ 20:00</b></div>
-          <div class="summary-line"><span>주문</span><b>당일 한정 수량</b></div>
+          <div class="summary-line"><span>매장명</span><b>풍무농산</b></div>
+          <div class="summary-line"><span>배달 지역</span><b>아라동 한정</b></div>
+          <div class="summary-line"><span>배달 시간</span><b>주문 확인 후 순차 배달</b></div>
         </div>
       `;
     }
@@ -822,6 +799,10 @@
     });
 
     orderButton.addEventListener("click", () => openSheet(orderSheet()));
+    document.querySelector("#searchButton").addEventListener("click", () => {
+      openSheet(searchSheet());
+      requestAnimationFrame(() => document.querySelector("#searchInput")?.focus());
+    });
     document.querySelector("#cartButton").addEventListener("click", () => openSheet(orderSheet()));
     document.querySelector("#historyButton").addEventListener("click", () => openSheet(historySheet()));
     document.querySelector("#storeButton").addEventListener("click", () => openSheet(storeSheet()));
