@@ -148,6 +148,35 @@
       background: #fff;
       border-bottom: 1px solid var(--line);
     }
+    .deal-strip {
+      padding: 12px 12px 8px;
+      background: linear-gradient(180deg, #fff8e8, var(--paper));
+      border-bottom: 1px solid #efdcb0;
+    }
+    .deal-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 15px;
+      font-weight: 950;
+    }
+    .deal-title span {
+      padding: 6px 9px;
+      border-radius: 999px;
+      color: #6f4300;
+      background: #ffe9b7;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .product.deal {
+      padding: 14px 8px 16px;
+      border: 1px solid #e4c474;
+      border-radius: 14px;
+      background: #fffefa;
+      box-shadow: 0 12px 28px rgba(126, 83, 10, .1);
+    }
     .notice b {
       display: block;
       font-size: 17px;
@@ -595,10 +624,10 @@
     const products = [
       { id: "paprika", category: "today", badge: "오늘특가", name: "파프리카 혼합 3입", price: 4900, stock: 13, sold: 1105, limit: 4, opensAt: "오후 2시 오픈", img: "https://images.pexels.com/photos/37100272/pexels-photo-37100272.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "빨강·노랑 파프리카 혼합 3입입니다.\n샐러드와 볶음용으로 활용하기 좋습니다." },
       { id: "strawberry", category: "fruit", badge: "담양 산지", name: "담양 설향딸기 600g", price: 7900, stock: 18, sold: 2946, limit: 3, img: "https://images.pexels.com/photos/7946844/pexels-photo-7946844.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "박스 가득 담긴 향 진한 설향 딸기입니다.\n주문 확인 후 순차 배달됩니다." },
-      { id: "tomato", category: "fruit", badge: "오늘 입고", name: "대추방울토마토 750g", price: 5900, stock: 25, sold: 9616, limit: 4, img: "https://images.pexels.com/photos/26950718/pexels-photo-26950718.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "상자에 진열된 싱싱한 방울토마토입니다.\n샐러드와 도시락 간식으로 좋아요." },
-      { id: "apple", category: "fruit", badge: "아삭", name: "가정용 혼합사과 2kg", price: 9900, stock: 14, sold: 1728, limit: 3, img: "https://images.pexels.com/photos/6097872/pexels-photo-6097872.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "박스 진열된 여러 품종의 사과를 담았습니다.\n가정용으로 부담 없이 드시기 좋습니다." },
+      { id: "tomato", category: "fruit", badge: "오늘 입고", name: "대추방울토마토 750g", price: 5900, stock: 25, sold: 9616, limit: 4, img: "https://images.pexels.com/photos/6297450/pexels-photo-6297450.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "상자에 진열된 싱싱한 방울토마토입니다.\n샐러드와 도시락 간식으로 좋아요." },
+      { id: "apple", category: "fruit", badge: "아삭", name: "가정용 혼합사과 2kg", price: 9900, stock: 14, sold: 1728, limit: 3, img: "https://images.pexels.com/photos/16795582/pexels-photo-16795582.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "박스 진열된 여러 품종의 사과를 담았습니다.\n가정용으로 부담 없이 드시기 좋습니다." },
       { id: "orange", category: "fruit", badge: "고당도", name: "캘리포니아 오렌지 6과", price: 6900, stock: 16, sold: 1842, limit: 3, img: "https://images.pexels.com/photos/15722576/pexels-photo-15722576.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "수분감 좋은 오렌지 6과 묶음입니다.\n새콤달콤한 과일을 찾는 분께 추천합니다." },
-      { id: "grape", category: "fruit", badge: "달콤", name: "씨없는 청포도 500g", price: 8900, stock: 12, sold: 1320, limit: 2, img: "https://images.pexels.com/photos/32665722/pexels-photo-32665722.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "알이 탱글한 포도 한 팩입니다.\n냉장 보관 후 차갑게 드시면 더 좋아요." },
+      { id: "grape", category: "fruit", badge: "달콤", name: "씨없는 청포도 500g", price: 8900, stock: 12, sold: 1320, limit: 2, img: "https://images.pexels.com/photos/15609562/pexels-photo-15609562.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "알이 탱글한 포도 한 팩입니다.\n냉장 보관 후 차갑게 드시면 더 좋아요." },
       { id: "lettuce", category: "veg", badge: "쌈채소", name: "쌈채소 모둠 한 팩", price: 4500, stock: 22, sold: 1574, limit: 5, img: "https://images.pexels.com/photos/28768309/pexels-photo-28768309.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "고기와 함께 먹기 좋은 쌈채소 모둠입니다.\n싱싱한 잎만 골라 담았습니다." },
       { id: "cucumber", category: "veg", badge: "시원", name: "백오이 3입", price: 3500, stock: 28, sold: 2034, limit: 5, img: "https://images.pexels.com/photos/2329440/pexels-photo-2329440.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "무침과 샐러드에 좋은 백오이 3입입니다.\n단단하고 신선한 물량으로 준비했습니다." },
       { id: "carrot", category: "veg", badge: "국내산", name: "흙당근 1kg", price: 4200, stock: 19, sold: 1184, limit: 4, img: "https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "요리용으로 쓰기 좋은 국내산 흙당근입니다.\n세척 후 냉장 보관해주세요." },
@@ -623,10 +652,21 @@
 
     function renderProducts(filter = "all") {
       const list = filter === "all" ? products : products.filter((item) => item.category === filter);
-      productList.innerHTML = list.map((item) => {
+      const deal = products.find((item) => item.category === "today");
+      const normalList = list.filter((item) => item.id !== deal?.id);
+      const dealHtml = (filter === "all" || filter === "today") && deal ? `
+        <section class="deal-strip">
+          <div class="deal-title">이벤트 특가 <span>${deal.opensAt}</span></div>
+          ${productCard(deal, true)}
+        </section>
+      ` : "";
+      productList.innerHTML = dealHtml + normalList.map((item) => productCard(item, false)).join("");
+    }
+
+    function productCard(item, isDeal) {
         const qty = cart.get(item.id)?.qty || 0;
         return `
-          <article class="product">
+          <article class="product ${isDeal ? "deal" : ""}">
             <div class="product-main">
               <div class="photo" style="background-image:url('${item.img}')" aria-hidden="true">
                 <span class="label">${item.badge}</span>
@@ -649,7 +689,6 @@
             </div>
           </article>
         `;
-      }).join("");
     }
 
     function changeQty(id, delta) {

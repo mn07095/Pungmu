@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>풍무농산 주문관리</title>
+  <style>
+    @import url("https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css");
+    @import url("https://fonts.googleapis.com/css2?family=Song+Myung&display=swap");
+    :root { --ink:#080d0b; --muted:#6e7772; --line:#e2e7e3; --paper:#fffefa; --soft:#f5f7f3; --teal:#075f55; --dark:#033f38; --mint:#e7f3ed; --red:#d94235; }
+    *{box-sizing:border-box} body{margin:0;min-width:320px;color:var(--ink);font-family:"SUIT Variable",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#edf1ec}
+    button{border:0;background:none;cursor:pointer;font:inherit;color:inherit}
+    .app{max-width:480px;min-height:100vh;margin:0 auto;background:#f8faf6;box-shadow:0 0 0 1px rgba(0,0,0,.06)}
+    .topbar{position:sticky;top:0;z-index:10;height:78px;display:grid;grid-template-columns:74px 1fr 74px;align-items:center;padding:10px 13px;background:rgba(255,254,250,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
+    .brand{text-align:center;font-family:"Song Myung",serif;font-size:25px;line-height:1}.brand small{display:block;margin-top:5px;color:var(--teal);font-family:"SUIT Variable",sans-serif;font-size:12px;font-weight:900}
+    .nav-btn{height:42px;border-radius:10px;display:grid;place-items:center;color:var(--dark);background:var(--mint);font-size:12px;font-weight:900}
+    .page{padding:14px 12px 36px}.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.tab{height:44px;border-radius:12px;background:#fff;border:1px solid var(--line);font-weight:950}.tab.active{color:#fff;background:var(--dark);border-color:var(--dark)}
+    .section{margin-top:12px;padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}h1{margin:0;font-size:21px;font-weight:950}.chip{padding:6px 10px;border-radius:999px;color:var(--dark);background:var(--mint);font-size:12px;font-weight:950}
+    .order{display:grid;gap:9px;padding:14px 0;border-top:1px solid var(--line)}.order:first-of-type{border-top:0}.head{display:flex;justify-content:space-between;gap:10px}.head strong{font-weight:950}.status{padding:6px 9px;border-radius:999px;font-size:12px;font-weight:950}.new{color:#1c4eb5;background:#e9efff}.done{color:#13663f;background:#e5f5eb}.old{color:#595f5b;background:#eef0ec}.detail{color:#4d5752;font-size:14px;font-weight:750;line-height:1.5}.actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.actions button{height:40px;border-radius:10px;background:var(--soft);font-size:13px;font-weight:900}.actions .primary{color:#fff;background:var(--dark)}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <button class="nav-btn" onclick="location.href='admin.html'">관리자</button>
+      <div class="brand">풍무농산<small>주문관리</small></div>
+      <button class="nav-btn" onclick="location.href='index.html'">주문서</button>
+    </header>
+    <section class="page">
+      <div class="tabs">
+        <button class="tab active" data-tab="new">주문내역</button>
+        <button class="tab" data-tab="done">배달완료</button>
+        <button class="tab" data-tab="old">이전 주문</button>
+      </div>
+      <section class="section">
+        <div class="section-head"><h1 id="title">주문내역</h1><span class="chip" id="count">3건</span></div>
+        <div id="orders"></div>
+      </section>
+    </section>
+  </main>
+  <script>
+    const data = {
+      new: [
+        ["주문 #A-1024", "딸기 1개, 토마토 2개", "총 19,700원 / 아라동 / 상세 주소 확인 필요", "신규"],
+        ["주문 #A-1025", "사과 1개, 청포도 1개", "총 18,800원 / 문 앞 요청", "신규"],
+        ["주문 #A-1026", "파프리카 2개", "총 9,800원 / 공동현관 호출", "신규"]
+      ],
+      done: [
+        ["주문 #A-1021", "쌈채소 2개, 파프리카 1개", "총 13,900원 / 배달 완료", "완료"],
+        ["주문 #A-1020", "오이 2개, 당근 1개", "총 11,200원 / 배달 완료", "완료"]
+      ],
+      old: [
+        ["주문 #A-0998", "토마토 1개, 오렌지 1개", "총 12,800원 / 지난 행사", "이전"],
+        ["주문 #A-0997", "딸기 2개", "총 15,800원 / 지난 행사", "이전"]
+      ]
+    };
+    const labels = { new: "주문내역", done: "배달완료", old: "이전 주문내역" };
+    function render(type="new") {
+      document.querySelector("#title").textContent = labels[type];
+      document.querySelector("#count").textContent = `${data[type].length}건`;
+      document.querySelector("#orders").innerHTML = data[type].map((row) => `
+        <div class="order">
+          <div class="head"><strong>${row[0]}</strong><span class="status ${type}">${row[3]}</span></div>
+          <div class="detail">${row[1]}<br>${row[2]}</div>
+          <div class="actions"><button>연락</button><button class="primary">${type === "new" ? "배달완료" : "보기"}</button><button>메모</button></div>
+        </div>`).join("");
+    }
+    document.querySelectorAll(".tab").forEach((tab) => tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach((item) => item.classList.remove("active"));
+      tab.classList.add("active");
+      render(tab.dataset.tab);
+    }));
+    render();
+  </script>
+</body>
+</html>
