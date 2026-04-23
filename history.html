@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>풍무농산 주문내역</title>
+  <style>
+    @import url("https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css");
+    @import url("https://fonts.googleapis.com/css2?family=Song+Myung&display=swap");
+    :root{--ink:#07110d;--muted:#66716b;--line:#e2e8e2;--paper:#fffefa;--soft:#f5f8f3;--green:#06483e;--teal:#087465;--mint:#e7f4ee}
+    *{box-sizing:border-box}body{margin:0;min-width:320px;color:var(--ink);font-family:"SUIT Variable",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#eaf0eb}button{border:0;background:none;color:inherit;font:inherit;cursor:pointer}.app{max-width:480px;min-height:100vh;margin:0 auto;background:#fbfcf7;box-shadow:0 0 0 1px rgba(0,0,0,.06)}
+    .topbar{position:sticky;top:0;z-index:10;height:82px;display:grid;grid-template-columns:74px 1fr 74px;align-items:center;padding:12px 13px;background:rgba(255,254,250,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}.brand{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:"Song Myung",serif;font-size:26px;line-height:1;pointer-events:none}.brand small{display:block;margin-top:6px;color:var(--teal);font-family:"SUIT Variable";font-size:12px;font-weight:950}.nav{height:43px;border-radius:11px;color:var(--green);background:var(--mint);font-size:12px;font-weight:950}
+    .page{padding:14px 12px 36px}.section{padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}.head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}h1{margin:0;font-size:21px;font-weight:950}.chip{padding:6px 10px;border-radius:999px;color:var(--green);background:var(--mint);font-size:12px;font-weight:950}.order{display:grid;gap:10px;padding:14px 0;border-top:1px solid var(--line)}.order:first-of-type{border-top:0}.order-head{display:flex;justify-content:space-between;gap:10px}.order-head strong{font-weight:950}.status{padding:6px 9px;border-radius:999px;font-size:12px;font-weight:950}.new{color:#1c4eb5;background:#e9efff}.done{color:#13663f;background:#e5f5eb}.old{color:#595f5b;background:#eef0ec}.detail{color:#46534d;font-size:14px;font-weight:760;line-height:1.55}.empty{padding:34px 0;color:var(--muted);text-align:center;font-weight:850}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar"><button class="nav" onclick="location.href='index.html'">주문서</button><div class="brand">풍무농산<small>주문내역</small></div><button class="nav" onclick="location.href='cart.html'">장바구니</button></header>
+    <section class="page"><section class="section"><div class="head"><h1>내 주문내역</h1><span class="chip" id="count">0건</span></div><div id="orders"></div></section></section>
+  </main>
+  <script>
+    const labels={new:"접수완료",done:"배달완료",old:"이전주문"};
+    const money=(v)=>Number(v).toLocaleString("ko-KR")+"원";
+    function render(){const orders=JSON.parse(localStorage.getItem("pungmuOrders")||"[]");count.textContent=`${orders.length}건`;document.querySelector("#orders").innerHTML=orders.length?orders.map((order)=>`<div class="order"><div class="order-head"><strong>주문 #${order.id}</strong><span class="status ${order.status}">${labels[order.status]||"접수완료"}</span></div><div class="detail">${order.items.map((item)=>`${item.name} ${item.qty}개`).join(", ")}<br>총 ${money(order.total)} / ${order.payment}<br>주소 ${order.address}<br>요청사항 ${order.memo||"없음"}</div></div>`).join(""):`<div class="empty">아직 주문내역이 없습니다.</div>`}
+    render();
+  </script>
+</body>
+</html>
