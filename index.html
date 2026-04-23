@@ -5,19 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>풍무농산</title>
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap");
+    @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&display=swap");
 
     :root {
-      --ink: #171916;
-      --muted: #737970;
-      --line: #e5e7e2;
-      --paper: #fffdf7;
-      --soft: #f4f5ef;
-      --green: #06452f;
-      --green-2: #0c6a44;
-      --leaf: #7d9d36;
-      --orange: #f36f2b;
-      --red: #db3b2f;
+      --ink: #080d0b;
+      --muted: #6e7772;
+      --line: #e2e7e3;
+      --paper: #fffefa;
+      --soft: #f5f7f3;
+      --teal: #075f55;
+      --teal-dark: #033f38;
+      --mint: #e7f3ed;
+      --gold: #d7a642;
+      --red: #d94235;
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
@@ -27,284 +28,344 @@
       margin: 0;
       min-width: 320px;
       color: var(--ink);
-      font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #eef1ea;
+      font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #edf1ec;
       letter-spacing: 0;
     }
     button, input, textarea { font: inherit; color: inherit; }
-    button { border: 0; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    button {
+      border: 0;
+      background: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
 
     .app {
       max-width: 480px;
       min-height: 100vh;
       margin: 0 auto;
       background: var(--paper);
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, .05);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, .06);
       overflow-x: hidden;
     }
 
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 20;
-      height: 72px;
+      z-index: 30;
+      height: 78px;
       display: grid;
-      grid-template-columns: 48px 1fr 70px;
+      grid-template-columns: 48px 1fr 84px;
       align-items: center;
-      padding: 10px 14px;
-      background: rgba(255, 253, 247, .94);
+      gap: 6px;
+      padding: 10px 13px;
+      background: rgba(255, 254, 250, .96);
       border-bottom: 1px solid var(--line);
       backdrop-filter: blur(18px);
     }
     .icon-btn {
       width: 42px;
       height: 42px;
-      border-radius: 8px;
+      border-radius: 10px;
       display: grid;
       place-items: center;
-      color: var(--green);
+      color: #101513;
     }
+    .icon-btn:active { background: var(--mint); }
     .brand {
-      text-align: center;
-      font-family: "Gowun Batang", serif;
-      font-size: 27px;
-      font-weight: 700;
-      line-height: 1;
-      color: #080a07;
-    }
-    .admin-link {
-      justify-self: end;
-      min-width: 62px;
-      height: 42px;
-      border-radius: 8px;
-      background: var(--soft);
-      color: #343a34;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .hero {
-      padding: 18px 18px 16px;
-      background:
-        linear-gradient(180deg, rgba(255,253,247,.1), var(--paper) 82%),
-        url("https://images.pexels.com/photos/31979013/pexels-photo-31979013.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&fit=crop") center/cover;
-      border-bottom: 1px solid var(--line);
-    }
-    .hero-card {
-      min-height: 174px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 18px;
-      border-radius: 8px;
-      color: #fff;
-      background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(5,47,34,.86));
-      box-shadow: 0 18px 40px rgba(13, 45, 28, .22);
-    }
-    .eyebrow {
-      display: inline-flex;
-      width: fit-content;
-      padding: 6px 9px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.18);
-      font-size: 12px;
-      font-weight: 800;
-    }
-    .hero h1 {
-      margin: 9px 0 0;
-      font-size: 28px;
-      line-height: 1.2;
-      font-weight: 900;
-      word-break: keep-all;
-    }
-    .hero-meta {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-top: 12px;
+      place-items: center;
+      line-height: 1.05;
+      text-align: center;
     }
-    .hero-meta div {
-      padding: 10px;
-      border-radius: 8px;
-      background: rgba(255,255,255,.86);
-      color: #1d241f;
-      font-size: 12px;
-      font-weight: 800;
+    .brand-name {
+      font-family: "Noto Serif KR", serif;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 0;
     }
-    .hero-meta b {
-      display: block;
-      margin-top: 2px;
-      color: var(--green);
-      font-size: 14px;
+    .branch {
+      margin-top: 4px;
+      color: var(--teal);
+      font-size: 13px;
       font-weight: 900;
     }
+    .tools {
+      justify-self: end;
+      display: flex;
+      gap: 2px;
+      align-items: center;
+    }
 
-    .date-tabs, .category-tabs {
+    .date-strip {
       display: flex;
       gap: 8px;
       overflow-x: auto;
-      padding: 12px 16px;
-      background: var(--paper);
+      padding: 7px 14px 10px;
+      background: #fbfcf8;
       border-bottom: 1px solid var(--line);
       scrollbar-width: none;
     }
-    .date-tabs::-webkit-scrollbar, .category-tabs::-webkit-scrollbar { display: none; }
-    .date-tab, .category-tab {
+    .date-strip::-webkit-scrollbar { display: none; }
+    .date {
       flex: 0 0 auto;
-      border: 1px solid #d8ddd5;
-      border-radius: 8px;
+      min-width: 106px;
+      padding: 8px 12px 7px;
+      border: 1px solid #dbe1dc;
+      border-radius: 10px;
       background: #fff;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-    .date-tab {
-      min-width: 116px;
-      padding: 9px 14px;
       text-align: center;
+      font-weight: 900;
     }
-    .date-tab span {
+    .date strong {
       display: block;
-      margin-top: 2px;
+      font-size: 14px;
+      line-height: 1.15;
+    }
+    .date span {
+      display: block;
+      margin-top: 4px;
       color: var(--muted);
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
     }
-    .date-tab.active, .category-tab.active {
-      border-color: var(--green);
-      background: var(--green);
+    .date.active {
+      border-color: var(--teal);
       color: #fff;
+      background: var(--teal);
+      box-shadow: 0 8px 18px rgba(7, 95, 85, .18);
     }
-    .date-tab.active span { color: rgba(255,255,255,.76); }
-    .category-tabs {
-      position: sticky;
-      top: 72px;
-      z-index: 18;
-      backdrop-filter: blur(14px);
-      background: rgba(255,253,247,.94);
+    .date.active span { color: rgba(255,255,255,.74); }
+
+    .notice {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 18px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
     }
-    .category-tab {
-      height: 40px;
-      padding: 0 18px;
-      font-size: 14px;
+    .notice b {
+      display: block;
+      font-size: 17px;
+      font-weight: 950;
+    }
+    .notice span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .notice-pill {
+      padding: 8px 10px;
+      border-radius: 999px;
+      color: var(--teal-dark);
+      background: var(--mint);
+      font-size: 12px;
+      font-weight: 950;
+      white-space: nowrap;
     }
 
-    .products {
-      padding: 0 12px 154px;
+    .category-strip {
+      position: sticky;
+      top: 78px;
+      z-index: 25;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 14px;
+      background: rgba(255, 254, 250, .95);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      scrollbar-width: none;
+    }
+    .category-strip::-webkit-scrollbar { display: none; }
+    .category {
+      flex: 0 0 auto;
+      height: 38px;
+      padding: 0 17px;
+      border: 1px solid #d5dcd6;
+      border-radius: 999px;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 900;
+    }
+    .category.active {
+      color: #fff;
+      border-color: var(--teal-dark);
+      background: var(--teal-dark);
+    }
+
+    .product-list {
+      padding: 0 10px 152px;
     }
     .product {
-      padding: 18px 6px 16px;
+      padding: 22px 10px 16px;
       border-bottom: 1px solid var(--line);
     }
     .product-main {
       display: grid;
-      grid-template-columns: 124px 1fr;
-      gap: 14px;
+      grid-template-columns: 132px 1fr;
+      gap: 16px;
+      align-items: start;
     }
     .photo {
-      width: 124px;
+      width: 132px;
       aspect-ratio: 1 / 1;
-      border-radius: 8px;
-      background: #dfe6d8 center/cover;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,.05);
+      border-radius: 10px;
+      background: #e2e8df center/cover;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .05);
+    }
+    .photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.16));
+      pointer-events: none;
+    }
+    .label {
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      z-index: 1;
+      padding: 5px 7px;
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(3, 63, 56, .88);
+      font-size: 11px;
+      font-weight: 950;
+    }
+    .sale {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      z-index: 1;
+      color: #fff;
+      font-size: 23px;
+      font-weight: 950;
+      text-shadow: 0 2px 8px rgba(0,0,0,.3);
     }
     .product h2 {
-      margin: 0 0 6px;
-      font-size: 20px;
-      line-height: 1.28;
-      font-weight: 900;
+      margin: -2px 0 6px;
+      font-size: 21px;
+      line-height: 1.25;
+      font-weight: 950;
       word-break: keep-all;
     }
     .price {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 800;
     }
     .price b {
-      font-size: 23px;
-      font-weight: 900;
+      font-size: 24px;
+      font-weight: 950;
     }
     .stock {
       margin-top: 7px;
       color: var(--red);
-      font-size: 16px;
-      font-weight: 900;
+      font-size: 17px;
+      font-weight: 950;
     }
-    .note {
+    .meta {
       margin-top: 5px;
-      color: #515850;
-      font-size: 13px;
-      font-weight: 700;
+      color: #313a35;
+      font-size: 14px;
+      font-weight: 800;
       line-height: 1.45;
     }
     .actions {
       display: grid;
-      grid-template-columns: minmax(96px, .8fr) 1.4fr;
-      gap: 9px;
-      margin-top: 13px;
+      grid-template-columns: minmax(110px, .95fr) minmax(178px, 1.5fr);
+      gap: 10px;
+      margin-top: 14px;
     }
-    .detail-btn, .stepper {
-      height: 54px;
-      border: 1px solid #cfd6cd;
-      border-radius: 8px;
+    .detail-btn {
+      height: 58px;
+      border: 1px solid #bfc9c1;
+      border-radius: 10px;
       background: #fff;
+      font-size: 17px;
       font-weight: 900;
     }
     .stepper {
+      height: 58px;
       display: grid;
-      grid-template-columns: 52px 1fr 52px;
+      grid-template-columns: 56px 1fr 56px;
       align-items: center;
+      border: 1px solid #bfc9c1;
+      border-radius: 10px;
+      background: #fff;
       overflow: hidden;
     }
     .stepper button {
       height: 100%;
-      font-size: 26px;
-      font-weight: 900;
+      font-size: 28px;
+      font-weight: 950;
     }
     .stepper strong {
       text-align: center;
-      font-size: 19px;
-      font-weight: 900;
+      font-size: 20px;
+      font-weight: 950;
     }
-    .stepper button:active, .detail-btn:active { background: #edf4e8; }
+    .detail-btn:active, .stepper button:active { background: var(--mint); }
 
-    .bottom {
+    .to-top {
+      position: fixed;
+      right: calc(50% - 226px);
+      bottom: calc(98px + var(--safe-bottom));
+      z-index: 22;
+      width: 48px;
+      height: 48px;
+      border: 1px solid #0c1713;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 10px 24px rgba(0,0,0,.12);
+    }
+    .bottom-bar {
       position: fixed;
       left: 50%;
       bottom: 0;
-      z-index: 25;
+      z-index: 28;
       width: min(480px, 100%);
       transform: translateX(-50%);
       display: grid;
-      grid-template-columns: 112px 1fr;
+      grid-template-columns: 118px 1fr;
       gap: 10px;
       padding: 12px 12px calc(12px + var(--safe-bottom));
-      background: rgba(255,253,247,.95);
+      background: rgba(255, 254, 250, .96);
       border-top: 1px solid var(--line);
       backdrop-filter: blur(18px);
     }
-    .bottom button {
-      height: 56px;
-      border-radius: 8px;
-      font-size: 17px;
-      font-weight: 900;
+    .bottom-bar button {
+      height: 58px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 950;
     }
     .history {
-      border: 1px solid var(--green);
-      color: var(--green);
+      border: 1px solid var(--teal);
+      color: var(--teal-dark);
       background: #fff;
     }
     .order {
       color: #fff;
-      background: var(--green);
+      background: var(--teal-dark);
     }
 
     .sheet-backdrop {
       position: fixed;
       inset: 0;
-      z-index: 50;
+      z-index: 60;
       display: none;
       align-items: flex-end;
       justify-content: center;
-      background: rgba(0,0,0,.46);
+      background: rgba(0,0,0,.48);
     }
     .sheet-backdrop.open { display: flex; }
     .sheet {
@@ -312,9 +373,9 @@
       max-height: 86vh;
       overflow-y: auto;
       padding: 18px 18px calc(18px + var(--safe-bottom));
-      border-radius: 18px 18px 0 0;
+      border-radius: 20px 20px 0 0;
       background: var(--paper);
-      box-shadow: 0 -22px 60px rgba(0,0,0,.22);
+      box-shadow: 0 -20px 60px rgba(0,0,0,.24);
     }
     .sheet-head {
       display: flex;
@@ -326,12 +387,13 @@
     .sheet h2 {
       margin: 0;
       font-size: 22px;
-      font-weight: 900;
+      font-weight: 950;
+      word-break: keep-all;
     }
     .close {
       width: 38px;
       height: 38px;
-      border-radius: 8px;
+      border-radius: 10px;
       background: var(--soft);
       font-size: 22px;
     }
@@ -339,13 +401,13 @@
       width: 100%;
       aspect-ratio: 16 / 10;
       margin-bottom: 14px;
-      border-radius: 8px;
+      border-radius: 12px;
       background: center/cover;
     }
     .detail-copy {
-      color: #4f564f;
+      color: #4f5853;
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
       line-height: 1.68;
       white-space: pre-line;
     }
@@ -353,7 +415,7 @@
       display: grid;
       gap: 8px;
       padding: 14px;
-      border-radius: 8px;
+      border-radius: 12px;
       background: var(--soft);
     }
     .summary-line {
@@ -361,14 +423,14 @@
       justify-content: space-between;
       gap: 14px;
       font-size: 15px;
-      font-weight: 800;
+      font-weight: 850;
     }
     .summary-line.total {
       padding-top: 10px;
       margin-top: 4px;
-      border-top: 1px solid #dde2da;
+      border-top: 1px solid #dde4de;
       font-size: 20px;
-      font-weight: 900;
+      font-weight: 950;
     }
     .field {
       display: grid;
@@ -376,21 +438,21 @@
       margin-top: 12px;
     }
     .field label {
-      color: #5f665f;
+      color: #606a65;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
     }
     .input {
       width: 100%;
       min-height: 50px;
       padding: 13px 14px;
       border: 0;
-      border-radius: 8px;
+      border-radius: 12px;
       background: var(--soft);
       outline: 1px solid transparent;
-      font-weight: 700;
+      font-weight: 800;
     }
-    .input:focus { outline-color: var(--green-2); background: #fff; }
+    .input:focus { outline-color: var(--teal); background: #fff; }
     .radio-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -403,49 +465,53 @@
       align-items: center;
       gap: 8px;
       padding: 11px;
-      border: 1px solid #d5dbd3;
-      border-radius: 8px;
+      border: 1px solid #d5ddd6;
+      border-radius: 12px;
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 850;
     }
-    input[type="radio"] { accent-color: var(--green); }
+    input[type="radio"] { accent-color: var(--teal); }
     .submit {
       width: 100%;
-      height: 56px;
+      height: 58px;
       margin-top: 16px;
-      border-radius: 8px;
+      border-radius: 12px;
       color: #fff;
-      background: var(--green);
-      font-size: 17px;
-      font-weight: 900;
+      background: var(--teal-dark);
+      font-size: 18px;
+      font-weight: 950;
     }
     .toast {
       position: fixed;
       left: 50%;
       bottom: calc(88px + var(--safe-bottom));
-      z-index: 60;
+      z-index: 80;
       width: min(440px, calc(100% - 28px));
       transform: translate(-50%, 16px);
       opacity: 0;
       pointer-events: none;
       padding: 14px 16px;
-      border-radius: 8px;
+      border-radius: 12px;
       color: #fff;
-      background: rgba(6,69,47,.96);
-      font-weight: 900;
+      background: rgba(3,63,56,.96);
+      font-weight: 950;
       text-align: center;
       transition: .22s ease;
     }
     .toast.show { transform: translate(-50%, 0); opacity: 1; }
 
     @media (max-width: 380px) {
-      .topbar { grid-template-columns: 44px 1fr 62px; padding-inline: 10px; }
-      .brand { font-size: 24px; }
-      .hero h1 { font-size: 25px; }
-      .product-main { grid-template-columns: 108px 1fr; gap: 12px; }
-      .photo { width: 108px; }
+      .topbar { grid-template-columns: 44px 1fr 76px; padding-inline: 10px; }
+      .brand-name { font-size: 22px; }
+      .product-main { grid-template-columns: 112px 1fr; gap: 12px; }
+      .photo { width: 112px; }
       .product h2 { font-size: 18px; }
-      .bottom { grid-template-columns: 104px 1fr; }
+      .actions { grid-template-columns: 104px 1fr; }
+      .bottom-bar { grid-template-columns: 106px 1fr; }
+      .to-top { right: 16px; }
+    }
+    @media (min-width: 481px) {
+      .to-top { right: calc(50% - 222px); }
     }
   </style>
 </head>
@@ -453,39 +519,50 @@
   <main class="app">
     <header class="topbar">
       <button class="icon-btn" type="button" aria-label="메뉴" id="storeButton">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <svg width="27" height="27" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
       </button>
-      <div class="brand">풍무농산</div>
-      <button class="admin-link" type="button" onclick="location.href='admin.html'">관리자</button>
+      <div class="brand" aria-label="풍무농산">
+        <div class="brand-name">풍무농산</div>
+        <div class="branch">- 풍무점 -</div>
+      </div>
+      <div class="tools">
+        <button class="icon-btn" type="button" aria-label="검색">
+          <svg width="27" height="27" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m21 21-4.3-4.3M10.8 18.2a7.4 7.4 0 1 1 0-14.8 7.4 7.4 0 0 1 0 14.8Z" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn" type="button" aria-label="장바구니" id="cartButton">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.4 7.2h13.2l-1.4 7.4H8.1L6.4 7.2ZM6.4 7.2 5.8 4.6H3.7M9.2 20.1a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4ZM17.2 20.1a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Z" stroke="currentColor" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
     </header>
 
-    <section class="hero">
-      <div class="hero-card">
-        <span class="eyebrow">오늘 입고 · 한정 수량</span>
-        <h1>과일과 채소만<br>가볍게 담아가세요</h1>
+    <nav class="date-strip" aria-label="행사일 선택">
+      <button class="date active" type="button"><strong>4월 24일 (금)</strong><span>9개 상품 접수중</span></button>
+      <button class="date" type="button"><strong>4월 25일 (토)</strong><span>6개 상품 예정</span></button>
+      <button class="date" type="button"><strong>4월 27일 (월)</strong><span>5개 상품 예정</span></button>
+    </nav>
+
+    <section class="notice">
+      <div>
+        <b>오늘 들어온 신선 상품</b>
+        <span>12:00 ~ 20:00 매장 수령 가능</span>
       </div>
-      <div class="hero-meta">
-        <div>픽업 시간<b>12:00 - 20:00</b></div>
-        <div>접수 마감<b>오늘 밤 9시</b></div>
-      </div>
+      <div class="notice-pill">소량입고</div>
     </section>
 
-    <nav class="date-tabs" aria-label="행사일 선택">
-      <button class="date-tab active" type="button">4월 24일 (금)<span>8개 상품 접수중</span></button>
-      <button class="date-tab" type="button">4월 25일 (토)<span>6개 상품 예정</span></button>
-      <button class="date-tab" type="button">4월 27일 (월)<span>5개 상품 예정</span></button>
+    <nav class="category-strip" aria-label="상품 카테고리">
+      <button class="category active" type="button" data-filter="all">전체</button>
+      <button class="category" type="button" data-filter="fruit">과일</button>
+      <button class="category" type="button" data-filter="veg">채소</button>
+      <button class="category" type="button" data-filter="today">오늘특가</button>
     </nav>
 
-    <nav class="category-tabs" aria-label="상품 카테고리">
-      <button class="category-tab active" type="button" data-filter="all">전체</button>
-      <button class="category-tab" type="button" data-filter="fruit">과일</button>
-      <button class="category-tab" type="button" data-filter="veg">채소</button>
-      <button class="category-tab" type="button" data-filter="today">오늘특가</button>
-    </nav>
+    <section class="product-list" id="productList"></section>
 
-    <section class="products" id="products"></section>
+    <button class="to-top" type="button" aria-label="맨 위로" id="topButton">
+      <svg width="25" height="25" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M6.5 10.5 12 5l5.5 5.5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
 
-    <nav class="bottom">
+    <nav class="bottom-bar">
       <button class="history" type="button" id="historyButton">주문내역</button>
       <button class="order" type="button" id="orderButton">주문하기</button>
     </nav>
@@ -501,9 +578,11 @@
       {
         id: "strawberry",
         category: "fruit",
-        name: "담양 설향 딸기 600g",
+        badge: "담양 산지",
+        name: "담양 설향딸기 600g",
         price: 7900,
         stock: 18,
+        sold: 2946,
         limit: 3,
         img: "https://images.pexels.com/photos/17616208/pexels-photo-17616208.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop",
         desc: "향이 진하고 과육이 단단한 설향 딸기입니다.\n무른 과일이라 당일 픽업을 권장합니다."
@@ -511,9 +590,11 @@
       {
         id: "tomato",
         category: "fruit",
+        badge: "오늘 입고",
         name: "대추방울토마토 750g",
         price: 5900,
         stock: 25,
+        sold: 9616,
         limit: 4,
         img: "https://images.pexels.com/photos/29037015/pexels-photo-29037015.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop",
         desc: "껍질이 얇고 단맛이 좋은 대추방울토마토입니다.\n샐러드와 도시락 간식으로 좋아요."
@@ -521,9 +602,11 @@
       {
         id: "orange",
         category: "fruit",
-        name: "고당도 오렌지 6과",
+        badge: "고당도",
+        name: "캘리포니아 오렌지 6과",
         price: 6900,
         stock: 16,
+        sold: 1842,
         limit: 3,
         img: "https://images.pexels.com/photos/15722576/pexels-photo-15722576.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop",
         desc: "수분감 좋은 오렌지 6과 묶음입니다.\n새콤달콤한 과일을 찾는 분께 추천합니다."
@@ -531,9 +614,11 @@
       {
         id: "lettuce",
         category: "veg",
+        badge: "쌈채소",
         name: "쌈채소 모둠 한 팩",
         price: 4500,
         stock: 22,
+        sold: 1574,
         limit: 5,
         img: "https://images.pexels.com/photos/28768309/pexels-photo-28768309.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop",
         desc: "고기와 함께 먹기 좋은 쌈채소 모둠입니다.\n입고 물량 중 싱싱한 잎만 골라 담았습니다."
@@ -541,9 +626,11 @@
       {
         id: "zucchini",
         category: "veg",
-        name: "국내산 애호박 2입",
+        badge: "국내산",
+        name: "애호박 2입",
         price: 3900,
         stock: 17,
+        sold: 928,
         limit: 5,
         img: "https://images.pexels.com/photos/29560751/pexels-photo-29560751.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop",
         desc: "찌개와 볶음에 쓰기 좋은 국내산 애호박입니다.\n표면이 단단한 물량으로 준비했습니다."
@@ -551,9 +638,11 @@
       {
         id: "paprika",
         category: "today",
+        badge: "오늘특가",
         name: "파프리카 혼합 3입",
         price: 4900,
         stock: 13,
+        sold: 1105,
         limit: 4,
         img: "https://images.pexels.com/photos/31979013/pexels-photo-31979013.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop",
         desc: "색감 좋은 파프리카 혼합 3입입니다.\n샐러드와 볶음용으로 활용하기 좋습니다."
@@ -561,7 +650,7 @@
     ];
 
     const cart = new Map();
-    const productWrap = document.querySelector("#products");
+    const productList = document.querySelector("#productList");
     const orderButton = document.querySelector("#orderButton");
     const sheetBackdrop = document.querySelector("#sheetBackdrop");
     const sheet = document.querySelector("#sheet");
@@ -571,29 +660,32 @@
     const cartCount = () => [...cart.values()].reduce((sum, item) => sum + item.qty, 0);
     const cartTotal = () => [...cart.values()].reduce((sum, item) => sum + item.qty * item.price, 0);
 
-    function updateButton() {
+    function updateOrderButton() {
       const count = cartCount();
       orderButton.textContent = count ? `주문하기 (${count}개)` : "주문하기";
     }
 
-    function render(filter = "all") {
+    function renderProducts(filter = "all") {
       const list = filter === "all" ? products : products.filter((item) => item.category === filter);
-      productWrap.innerHTML = list.map((item) => {
+      productList.innerHTML = list.map((item) => {
         const qty = cart.get(item.id)?.qty || 0;
         return `
           <article class="product">
             <div class="product-main">
-              <div class="photo" style="background-image:url('${item.img}')" aria-hidden="true"></div>
+              <div class="photo" style="background-image:url('${item.img}')" aria-hidden="true">
+                <span class="label">${item.badge}</span>
+                <span class="sale">${item.price.toLocaleString("ko-KR")}</span>
+              </div>
               <div>
                 <h2>${item.name}</h2>
                 <div class="price">가격: <b>${money(item.price)}</b></div>
                 <div class="stock">${item.stock}개 남았어요!</div>
-                <div class="note">누적판매수량: ${(870 + item.stock * 9).toLocaleString("ko-KR")}<br>매장 픽업 가능</div>
+                <div class="meta">누적판매수량: ${item.sold.toLocaleString("ko-KR")}<br>12:00 ~ 20:00 수령 가능</div>
               </div>
             </div>
             <div class="actions">
               <button class="detail-btn" type="button" data-detail="${item.id}">상세보기</button>
-              <div class="stepper">
+              <div class="stepper" aria-label="${item.name} 수량 선택">
                 <button type="button" data-minus="${item.id}" aria-label="수량 빼기">-</button>
                 <strong>${qty}개</strong>
                 <button type="button" data-plus="${item.id}" aria-label="수량 더하기">+</button>
@@ -610,8 +702,8 @@
       const qty = Math.max(0, Math.min(item.limit, current + delta));
       if (qty) cart.set(id, { ...item, qty });
       else cart.delete(id);
-      render(document.querySelector(".category-tab.active").dataset.filter);
-      updateButton();
+      renderProducts(document.querySelector(".category.active").dataset.filter);
+      updateOrderButton();
     }
 
     function openSheet(html) {
@@ -652,8 +744,8 @@
           ${rows}
           <div class="summary-line total"><span>합계</span><b>${money(cartTotal())}</b></div>
         </div>
-        <div class="field"><label for="name">고객명 *</label><input class="input" id="name" value="김민서1057"></div>
-        <div class="field"><label for="phone">전화번호 *</label><input class="input" id="phone" value="010-0000-1057"></div>
+        <div class="field"><label for="name">고객명 *</label><input class="input" id="name" autocomplete="name" placeholder="이름을 입력하세요"></div>
+        <div class="field"><label for="phone">전화번호 *</label><input class="input" id="phone" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000"></div>
         <div class="field">
           <label>수령 방식</label>
           <div class="radio-row">
@@ -673,8 +765,7 @@
           <button class="close" type="button" data-close aria-label="닫기">×</button>
         </div>
         <div class="summary">
-          <div class="summary-line"><span>대추방울토마토 2개</span><b>11,800원</b></div>
-          <div class="summary-line"><span>상태</span><b>접수</b></div>
+          <div class="summary-line"><span>아직 조회된 주문이 없습니다</span><b>-</b></div>
         </div>
       `;
     }
@@ -686,14 +777,14 @@
           <button class="close" type="button" data-close aria-label="닫기">×</button>
         </div>
         <div class="summary">
-          <div class="summary-line"><span>매장명</span><b>풍무농산</b></div>
-          <div class="summary-line"><span>픽업</span><b>12:00 - 20:00</b></div>
-          <div class="summary-line"><span>지역</span><b>김포 풍무동</b></div>
+          <div class="summary-line"><span>매장명</span><b>풍무농산 풍무점</b></div>
+          <div class="summary-line"><span>수령</span><b>12:00 ~ 20:00</b></div>
+          <div class="summary-line"><span>주문</span><b>당일 한정 수량</b></div>
         </div>
       `;
     }
 
-    productWrap.addEventListener("click", (event) => {
+    productList.addEventListener("click", (event) => {
       const plus = event.target.closest("[data-plus]");
       const minus = event.target.closest("[data-minus]");
       const detail = event.target.closest("[data-detail]");
@@ -702,16 +793,16 @@
       if (detail) openSheet(detailSheet(products.find((item) => item.id === detail.dataset.detail)));
     });
 
-    document.querySelectorAll(".category-tab").forEach((tab) => {
+    document.querySelectorAll(".category").forEach((tab) => {
       tab.addEventListener("click", () => {
-        document.querySelectorAll(".category-tab").forEach((item) => item.classList.remove("active"));
+        document.querySelectorAll(".category").forEach((item) => item.classList.remove("active"));
         tab.classList.add("active");
-        render(tab.dataset.filter);
+        renderProducts(tab.dataset.filter);
       });
     });
-    document.querySelectorAll(".date-tab").forEach((tab) => {
+    document.querySelectorAll(".date").forEach((tab) => {
       tab.addEventListener("click", () => {
-        document.querySelectorAll(".date-tab").forEach((item) => item.classList.remove("active"));
+        document.querySelectorAll(".date").forEach((item) => item.classList.remove("active"));
         tab.classList.add("active");
       });
     });
@@ -729,12 +820,15 @@
         setTimeout(() => toast.classList.remove("show"), 2200);
       }
     });
+
     orderButton.addEventListener("click", () => openSheet(orderSheet()));
+    document.querySelector("#cartButton").addEventListener("click", () => openSheet(orderSheet()));
     document.querySelector("#historyButton").addEventListener("click", () => openSheet(historySheet()));
     document.querySelector("#storeButton").addEventListener("click", () => openSheet(storeSheet()));
+    document.querySelector("#topButton").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-    render();
-    updateButton();
+    renderProducts();
+    updateOrderButton();
   </script>
 </body>
 </html>
