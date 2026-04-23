@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>풍무농산 관리자</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap");
+    :root {
+      --ink: #171916;
+      --muted: #737970;
+      --line: #e5e7e2;
+      --paper: #fffdf7;
+      --soft: #f4f5ef;
+      --green: #06452f;
+      --green-2: #0c6a44;
+      --red: #db3b2f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #eef1ea;
+    }
+    button, input, select { font: inherit; color: inherit; }
+    button { border: 0; background: none; cursor: pointer; }
+    .app {
+      max-width: 480px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #f6f7f2;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.05);
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 72px;
+      display: grid;
+      grid-template-columns: 48px 1fr 70px;
+      align-items: center;
+      padding: 10px 14px;
+      background: rgba(255,253,247,.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+    }
+    .icon-btn, .link-btn {
+      height: 42px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--soft);
+      color: var(--green);
+      font-weight: 900;
+    }
+    .icon-btn { width: 42px; background: transparent; }
+    .brand {
+      text-align: center;
+      font-family: "Gowun Batang", serif;
+      font-size: 27px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .link-btn {
+      justify-self: end;
+      min-width: 62px;
+      font-size: 12px;
+    }
+    .page { padding: 16px 14px 36px; }
+    .hero {
+      padding: 18px;
+      border-radius: 8px;
+      color: #fff;
+      background: linear-gradient(135deg, #053522, #0b6a43);
+      box-shadow: 0 18px 38px rgba(6, 69, 47, .18);
+    }
+    .hero h1 { margin: 0; font-size: 24px; font-weight: 900; }
+    .hero p {
+      margin: 6px 0 0;
+      color: rgba(255,255,255,.76);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .metric {
+      padding: 11px 10px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.13);
+    }
+    .metric small {
+      display: block;
+      color: rgba(255,255,255,.7);
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .metric b {
+      display: block;
+      margin-top: 4px;
+      font-size: 20px;
+      font-weight: 900;
+    }
+    .section {
+      margin-top: 14px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .section h2 { margin: 0; font-size: 18px; font-weight: 900; }
+    .chip {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--green);
+      background: #e7f2e9;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .filters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .field { display: grid; gap: 6px; margin-top: 10px; }
+    .field label {
+      color: #5f665f;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .input {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 13px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--soft);
+      outline: 1px solid transparent;
+      font-weight: 700;
+    }
+    .input:focus { outline-color: var(--green-2); background: #fff; }
+    .item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+    }
+    .item:first-of-type { border-top: 0; }
+    .item strong { display: block; font-size: 15px; font-weight: 900; }
+    .item span { color: var(--muted); font-size: 13px; font-weight: 700; }
+    .count {
+      min-width: 58px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--green);
+      text-align: center;
+      font-weight: 900;
+    }
+    .order-row {
+      display: grid;
+      gap: 9px;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+    .order-row:first-of-type { border-top: 0; }
+    .row-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .row-head strong { font-size: 16px; font-weight: 900; }
+    .status {
+      padding: 6px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .new { color: #224fc9; background: #e9efff; }
+    .done { color: #1b743e; background: #e6f6eb; }
+    .cancel { color: #b44720; background: #fff0e7; }
+    .row-detail {
+      color: #4e554f;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+    .actions button {
+      height: 42px;
+      border-radius: 8px;
+      background: var(--soft);
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .actions .primary { color: #fff; background: var(--green); }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <button class="icon-btn" type="button" aria-label="주문서로 이동" onclick="location.href='index.html'">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="brand">풍무농산</div>
+      <button class="link-btn" type="button" onclick="location.href='index.html'">주문서</button>
+    </header>
+
+    <section class="page">
+      <div class="hero">
+        <h1>관리자</h1>
+        <p>과일·채소 주문 접수와 재고를 확인합니다.</p>
+        <div class="metrics">
+          <div class="metric"><small>접수</small><b>24</b></div>
+          <div class="metric"><small>완료</small><b>11</b></div>
+          <div class="metric"><small>매출</small><b>38만</b></div>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>상품 관리</h2>
+          <span class="chip">4월 24일</span>
+        </div>
+        <div class="filters">
+          <div class="field" style="margin-top:0">
+            <label for="date">행사일</label>
+            <select class="input" id="date"><option>4월 24일 금요일</option><option>4월 25일 토요일</option></select>
+          </div>
+          <div class="field" style="margin-top:0">
+            <label for="status">상태</label>
+            <select class="input" id="status"><option>전체</option><option>판매중</option><option>품절</option></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="notice">알림 문구</label>
+          <input class="input" id="notice" value="오늘 밤 9시까지 주문 가능, 내일 매장 픽업">
+        </div>
+        <div style="margin-top:12px">
+          <div class="item"><div><strong>담양 설향 딸기 600g</strong><span>7,900원 / 과일</span></div><div class="count">18개</div></div>
+          <div class="item"><div><strong>대추방울토마토 750g</strong><span>5,900원 / 과일</span></div><div class="count">25개</div></div>
+          <div class="item"><div><strong>쌈채소 모둠 한 팩</strong><span>4,500원 / 채소</span></div><div class="count">22개</div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>주문 내역</h2>
+          <span class="chip">최근 접수순</span>
+        </div>
+        <div class="order-row">
+          <div class="row-head"><strong>김민서 1057님</strong><span class="status new">접수</span></div>
+          <div class="row-detail">대추방울토마토 2개, 설향 딸기 1개<br>총 19,700원 / 픽업 / 010-1234-5678</div>
+          <div class="actions"><button type="button">문자</button><button class="primary" type="button">완료</button><button type="button">취소</button></div>
+        </div>
+        <div class="order-row">
+          <div class="row-head"><strong>박지훈 2144님</strong><span class="status done">완료</span></div>
+          <div class="row-detail">쌈채소 모둠 2개, 파프리카 혼합 1개<br>총 13,900원 / 픽업 완료</div>
+          <div class="actions"><button type="button">문자</button><button type="button">보기</button><button type="button">취소</button></div>
+        </div>
+        <div class="order-row">
+          <div class="row-head"><strong>이수연 8301님</strong><span class="status cancel">취소</span></div>
+          <div class="row-detail">애호박 3개<br>총 11,700원 / 고객 요청 취소</div>
+          <div class="actions"><button type="button">문자</button><button type="button">복구</button><button type="button">삭제</button></div>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
