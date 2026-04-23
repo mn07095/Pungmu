@@ -7,70 +7,38 @@
   <style>
     @import url("https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css");
     @import url("https://fonts.googleapis.com/css2?family=Song+Myung&display=swap");
-    :root { --ink:#080d0b; --muted:#6e7772; --line:#e2e7e3; --paper:#fffefa; --soft:#f5f7f3; --teal:#075f55; --dark:#033f38; --mint:#e7f3ed; --red:#d94235; }
-    *{box-sizing:border-box} body{margin:0;min-width:320px;color:var(--ink);font-family:"SUIT Variable",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#edf1ec}
-    button{border:0;background:none;cursor:pointer;font:inherit;color:inherit}
-    .app{max-width:480px;min-height:100vh;margin:0 auto;background:#f8faf6;box-shadow:0 0 0 1px rgba(0,0,0,.06)}
-    .topbar{position:sticky;top:0;z-index:10;height:78px;display:grid;grid-template-columns:74px 1fr 74px;align-items:center;padding:10px 13px;background:rgba(255,254,250,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
-    .brand{text-align:center;font-family:"Song Myung",serif;font-size:25px;line-height:1}.brand small{display:block;margin-top:5px;color:var(--teal);font-family:"SUIT Variable",sans-serif;font-size:12px;font-weight:900}
-    .nav-btn{height:42px;border-radius:10px;display:grid;place-items:center;color:var(--dark);background:var(--mint);font-size:12px;font-weight:900}
-    .page{padding:14px 12px 36px}.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.tab{height:44px;border-radius:12px;background:#fff;border:1px solid var(--line);font-weight:950}.tab.active{color:#fff;background:var(--dark);border-color:var(--dark)}
-    .section{margin-top:12px;padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}h1{margin:0;font-size:21px;font-weight:950}.chip{padding:6px 10px;border-radius:999px;color:var(--dark);background:var(--mint);font-size:12px;font-weight:950}
-    .order{display:grid;gap:9px;padding:14px 0;border-top:1px solid var(--line)}.order:first-of-type{border-top:0}.head{display:flex;justify-content:space-between;gap:10px}.head strong{font-weight:950}.status{padding:6px 9px;border-radius:999px;font-size:12px;font-weight:950}.new{color:#1c4eb5;background:#e9efff}.done{color:#13663f;background:#e5f5eb}.old{color:#595f5b;background:#eef0ec}.detail{color:#4d5752;font-size:14px;font-weight:750;line-height:1.5}.actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.actions button{height:40px;border-radius:10px;background:var(--soft);font-size:13px;font-weight:900}.actions .primary{color:#fff;background:var(--dark)}
+    :root{--ink:#07110d;--muted:#66716b;--line:#e2e8e2;--paper:#fffefa;--soft:#f5f8f3;--green:#06483e;--teal:#087465;--mint:#e7f4ee;--red:#d94435}
+    *{box-sizing:border-box}body{margin:0;min-width:320px;color:var(--ink);font-family:"SUIT Variable",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#eaf0eb}button,input{font:inherit;color:inherit}button{border:0;background:none;cursor:pointer}.app{max-width:480px;min-height:100vh;margin:0 auto;background:#fbfcf7;box-shadow:0 0 0 1px rgba(0,0,0,.06)}
+    .topbar{position:sticky;top:0;z-index:10;height:82px;display:grid;grid-template-columns:82px 1fr 82px;align-items:center;padding:12px 13px;background:rgba(255,254,250,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}.brand{text-align:center;font-family:"Song Myung",serif;font-size:26px;line-height:1}.brand small{display:block;margin-top:6px;color:var(--teal);font-family:"SUIT Variable";font-size:12px;font-weight:950}.nav{height:43px;border-radius:11px;color:var(--green);background:var(--mint);font-size:12px;font-weight:950}
+    .page{padding:14px 12px 36px}.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.tab{height:44px;border:1px solid var(--line);border-radius:12px;background:#fff;font-weight:950}.tab.active{color:#fff;background:var(--green);border-color:var(--green)}.search{width:100%;height:48px;margin-top:10px;padding:12px 14px;border:0;border-radius:12px;background:#fff;outline:1px solid var(--line);font-weight:850}.search:focus{outline-color:var(--teal)}
+    .section{margin-top:12px;padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}.head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}h1{margin:0;font-size:21px;font-weight:950}.chip{padding:6px 10px;border-radius:999px;color:var(--green);background:var(--mint);font-size:12px;font-weight:950}.order{display:grid;gap:10px;padding:14px 0;border-top:1px solid var(--line)}.order:first-of-type{border-top:0}.order-head{display:flex;justify-content:space-between;gap:10px}.order-head strong{font-weight:950}.status{padding:6px 9px;border-radius:999px;font-size:12px;font-weight:950}.new{color:#1c4eb5;background:#e9efff}.done{color:#13663f;background:#e5f5eb}.old{color:#595f5b;background:#eef0ec}.detail{color:#46534d;font-size:14px;font-weight:760;line-height:1.55}.customer{padding:10px 11px;border-radius:11px;background:var(--soft);font-size:13px;font-weight:800;line-height:1.5}.actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.actions button{height:40px;border-radius:10px;background:var(--soft);font-size:13px;font-weight:900}.actions .primary{color:#fff;background:var(--green)}.actions .danger{color:#fff;background:var(--red)}.empty{padding:28px 0;color:var(--muted);text-align:center;font-weight:850}
   </style>
 </head>
 <body>
   <main class="app">
-    <header class="topbar">
-      <button class="nav-btn" onclick="location.href='admin.html'">관리자</button>
-      <div class="brand">풍무농산<small>주문관리</small></div>
-      <button class="nav-btn" onclick="location.href='index.html'">주문서</button>
-    </header>
+    <header class="topbar"><button class="nav" onclick="location.href='admin.html'">관리자</button><div class="brand">풍무농산<small>주문관리</small></div><button class="nav" onclick="location.href='index.html'">주문서</button></header>
     <section class="page">
-      <div class="tabs">
-        <button class="tab active" data-tab="new">주문내역</button>
-        <button class="tab" data-tab="done">배달완료</button>
-        <button class="tab" data-tab="old">이전 주문</button>
-      </div>
-      <section class="section">
-        <div class="section-head"><h1 id="title">주문내역</h1><span class="chip" id="count">3건</span></div>
-        <div id="orders"></div>
-      </section>
+      <div class="tabs"><button class="tab active" data-tab="new">주문내역</button><button class="tab" data-tab="done">배달완료</button><button class="tab" data-tab="old">이전 주문</button></div>
+      <input class="search" id="search" placeholder="이름, 연락처, 주소, 상품명 검색">
+      <section class="section"><div class="head"><h1 id="title">주문내역</h1><span class="chip" id="count">0건</span></div><div id="orders"></div></section>
     </section>
   </main>
   <script>
-    const data = {
-      new: [
-        ["주문 #A-1024", "딸기 1개, 토마토 2개", "총 19,700원 / 아라동 / 상세 주소 확인 필요", "신규"],
-        ["주문 #A-1025", "사과 1개, 청포도 1개", "총 18,800원 / 문 앞 요청", "신규"],
-        ["주문 #A-1026", "파프리카 2개", "총 9,800원 / 공동현관 호출", "신규"]
-      ],
-      done: [
-        ["주문 #A-1021", "쌈채소 2개, 파프리카 1개", "총 13,900원 / 배달 완료", "완료"],
-        ["주문 #A-1020", "오이 2개, 당근 1개", "총 11,200원 / 배달 완료", "완료"]
-      ],
-      old: [
-        ["주문 #A-0998", "토마토 1개, 오렌지 1개", "총 12,800원 / 지난 행사", "이전"],
-        ["주문 #A-0997", "딸기 2개", "총 15,800원 / 지난 행사", "이전"]
-      ]
-    };
-    const labels = { new: "주문내역", done: "배달완료", old: "이전 주문내역" };
-    function render(type="new") {
-      document.querySelector("#title").textContent = labels[type];
-      document.querySelector("#count").textContent = `${data[type].length}건`;
-      document.querySelector("#orders").innerHTML = data[type].map((row) => `
-        <div class="order">
-          <div class="head"><strong>${row[0]}</strong><span class="status ${type}">${row[3]}</span></div>
-          <div class="detail">${row[1]}<br>${row[2]}</div>
-          <div class="actions"><button>연락</button><button class="primary">${type === "new" ? "배달완료" : "보기"}</button><button>메모</button></div>
-        </div>`).join("");
-    }
-    document.querySelectorAll(".tab").forEach((tab) => tab.addEventListener("click", () => {
-      document.querySelectorAll(".tab").forEach((item) => item.classList.remove("active"));
-      tab.classList.add("active");
-      render(tab.dataset.tab);
-    }));
-    render();
+    const labels={new:"주문내역",done:"배달완료",old:"이전 주문내역"};
+    const sample=[{id:"A-1024",status:"new",createdAt:new Date().toISOString(),name:"고객 A",phone:"010-0000-1234",address:"아라동 101동 1001호",memo:"문 앞에 놓아주세요",payment:"계좌이체",items:[{name:"담양 설향딸기 600g",qty:1,price:7900},{name:"대추방울토마토 750g",qty:2,price:5900}],total:19700},{id:"A-1025",status:"done",createdAt:new Date().toISOString(),completedAt:new Date().toISOString(),name:"고객 B",phone:"010-1111-2222",address:"아라동 상가 2층",memo:"도착 전 연락",payment:"현장결제",items:[{name:"가정용 혼합사과 2kg",qty:1,price:9900}],total:9900},{id:"A-1018",status:"old",createdAt:"2026-04-21T03:00:00.000Z",completedAt:"2026-04-22T08:00:00.000Z",name:"고객 C",phone:"010-3333-4444",address:"아라동 205동",memo:"",payment:"계좌이체",items:[{name:"씨없는 청포도 500g",qty:1,price:8900}],total:8900}];
+    function loadOrders(){const saved=JSON.parse(localStorage.getItem("pungmuOrders")||"[]");return saved.length?saved:sample}
+    let orders=loadOrders();
+    function saveOrders(){localStorage.setItem("pungmuOrders",JSON.stringify(orders))}
+    function todayKey(date=new Date()){return date.toLocaleDateString("sv-SE",{timeZone:"Asia/Seoul"})}
+    function rollover(){const today=todayKey();let changed=false;orders=orders.map((order)=>{if(order.status==="done"&&order.completedAt&&todayKey(new Date(order.completedAt))<today){changed=true;return{...order,status:"old"}}return order});if(changed)saveOrders()}
+    const money=(v)=>Number(v).toLocaleString("ko-KR")+"원";
+    let current="new";
+    function matches(order,term){if(!term)return true;const blob=[order.id,order.name,order.phone,order.address,order.memo,order.payment,...order.items.map((item)=>item.name)].join(" ").toLowerCase();return blob.includes(term.toLowerCase())}
+    function render(){const term=document.querySelector("#search").value.trim();const rows=orders.filter((order)=>order.status===current&&matches(order,term));document.querySelector("#title").textContent=labels[current];document.querySelector("#count").textContent=`${rows.length}건`;document.querySelector("#orders").innerHTML=rows.length?rows.map((order)=>`<div class="order"><div class="order-head"><strong>주문 #${order.id}</strong><span class="status ${order.status}">${labels[order.status]}</span></div><div class="customer">이름 ${order.name}<br>연락처 ${order.phone}<br>주소 ${order.address}</div><div class="detail">${order.items.map((item)=>`${item.name} ${item.qty}개`).join(", ")}<br>총 ${money(order.total)} / ${order.payment}<br>요청사항 ${order.memo||"없음"}</div><div class="actions">${order.status==="new"?`<button data-call="${order.phone}">연락</button><button class="primary" data-complete="${order.id}">배달완료</button><button class="danger" data-delete="${order.id}">삭제</button>`:`<button data-call="${order.phone}">연락</button><button class="primary" data-view="${order.id}">보기</button><button class="danger" data-delete="${order.id}">삭제</button>`}</div></div>`).join(""):`<div class="empty">표시할 주문이 없습니다.</div>`}
+    document.querySelectorAll(".tab").forEach((tab)=>tab.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach((item)=>item.classList.remove("active"));tab.classList.add("active");current=tab.dataset.tab;render()}));
+    document.querySelector("#search").addEventListener("input",render);
+    document.body.addEventListener("click",(event)=>{const ds=event.target.dataset;if(ds.complete){orders=orders.map((order)=>order.id===ds.complete?{...order,status:"done",completedAt:new Date().toISOString()}:order);saveOrders();current="done";document.querySelectorAll(".tab").forEach((tab)=>tab.classList.toggle("active",tab.dataset.tab==="done"));render()}if(ds.delete){orders=orders.filter((order)=>order.id!==ds.delete);saveOrders();render()}if(ds.call){location.href=`tel:${ds.call}`}if(ds.view){const order=orders.find((item)=>item.id===ds.view);alert(`${order.name}\n${order.phone}\n${order.address}\n${order.items.map((item)=>`${item.name} ${item.qty}개`).join(", ")}`)}});
+    rollover();render();
   </script>
 </body>
 </html>
