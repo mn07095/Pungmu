@@ -55,7 +55,7 @@
       z-index: 30;
       height: 78px;
       display: grid;
-      grid-template-columns: 48px 1fr 84px;
+      grid-template-columns: 84px 1fr 84px;
       align-items: center;
       gap: 6px;
       padding: 10px 13px;
@@ -77,6 +77,7 @@
       place-items: center;
       line-height: 1.05;
       text-align: center;
+      justify-self: center;
     }
     .brand-name {
       font-family: "Song Myung", serif;
@@ -101,6 +102,7 @@
       display: flex;
       gap: 8px;
       overflow-x: auto;
+      justify-content: center;
       padding: 7px 14px 10px;
       background: #fbfcf8;
       border-bottom: 1px solid var(--line);
@@ -136,37 +138,6 @@
       box-shadow: 0 8px 18px rgba(7, 95, 85, .18);
     }
     .date.active span { color: rgba(255,255,255,.74); }
-
-    .delivery-banner {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: center;
-      padding: 12px 18px;
-      background: #f2f8f4;
-      border-bottom: 1px solid var(--line);
-    }
-    .delivery-banner b {
-      display: block;
-      font-size: 16px;
-      font-weight: 900;
-    }
-    .delivery-banner span {
-      display: block;
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .delivery-tag {
-      padding: 8px 10px;
-      border-radius: 999px;
-      color: #fff;
-      background: #607b2f;
-      font-size: 12px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
 
     .notice {
       display: grid;
@@ -300,17 +271,22 @@
     }
     .actions {
       display: grid;
-      grid-template-columns: minmax(110px, .95fr) minmax(178px, 1.5fr);
+      grid-template-columns: minmax(98px, .75fr) minmax(98px, .75fr) minmax(160px, 1.25fr);
       gap: 10px;
       margin-top: 14px;
     }
-    .detail-btn {
+    .detail-btn, .cart-add {
       height: 58px;
       border: 1px solid #bfc9c1;
       border-radius: 10px;
       background: #fff;
       font-size: 17px;
       font-weight: 900;
+    }
+    .cart-add {
+      color: var(--teal-dark);
+      background: var(--mint);
+      border-color: #bed8cd;
     }
     .stepper {
       height: 58px;
@@ -332,7 +308,7 @@
       font-size: 20px;
       font-weight: 950;
     }
-    .detail-btn:active, .stepper button:active { background: var(--mint); }
+    .detail-btn:active, .cart-add:active, .stepper button:active { background: var(--mint); }
 
     .to-top {
       position: fixed;
@@ -492,6 +468,26 @@
       font-weight: 850;
     }
     input[type="radio"] { accent-color: var(--teal); }
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid #d5ddd6;
+      border-radius: 12px;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.4;
+    }
+    .check-row input {
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      accent-color: var(--teal);
+      flex: 0 0 auto;
+    }
     .submit {
       width: 100%;
       height: 58px;
@@ -522,12 +518,13 @@
     .toast.show { transform: translate(-50%, 0); opacity: 1; }
 
     @media (max-width: 380px) {
-      .topbar { grid-template-columns: 44px 1fr 76px; padding-inline: 10px; }
+      .topbar { grid-template-columns: 74px 1fr 74px; padding-inline: 10px; }
       .brand-name { font-size: 22px; }
       .product-main { grid-template-columns: 112px 1fr; gap: 12px; }
       .photo { width: 112px; }
       .product h2 { font-size: 18px; }
-      .actions { grid-template-columns: 104px 1fr; }
+      .actions { grid-template-columns: 1fr 1fr; }
+      .stepper { grid-column: 1 / -1; }
       .bottom-bar { grid-template-columns: 106px 1fr; }
       .to-top { right: 16px; }
     }
@@ -565,17 +562,9 @@
     <section class="notice">
       <div>
         <b>오늘 들어온 신선 상품</b>
-        <span>아라동 한정 배달로 받아보세요</span>
+        <span>오늘 준비한 과일·채소를 골라 담아보세요</span>
       </div>
-      <div class="notice-pill">당일배송</div>
-    </section>
-
-    <section class="delivery-banner">
-      <div>
-        <b>아라동 배달 전용</b>
-        <span>주문 확인 후 순차 배달 · 매장 픽업 없음</span>
-      </div>
-      <div class="delivery-tag">아라동만</div>
+      <div class="notice-pill">소량입고</div>
     </section>
 
     <nav class="category-strip" aria-label="상품 카테고리">
@@ -604,16 +593,16 @@
 
   <script>
     const products = [
-      { id: "strawberry", category: "fruit", badge: "담양 산지", name: "담양 설향딸기 600g", price: 7900, stock: 18, sold: 2946, limit: 3, img: "https://images.pexels.com/photos/7946844/pexels-photo-7946844.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "박스 가득 담긴 향 진한 설향 딸기입니다.\n아라동 주문은 당일 순차 배달됩니다." },
+      { id: "paprika", category: "today", badge: "오늘특가", name: "파프리카 혼합 3입", price: 4900, stock: 13, sold: 1105, limit: 4, opensAt: "오후 2시 오픈", img: "https://images.pexels.com/photos/37100272/pexels-photo-37100272.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "빨강·노랑 파프리카 혼합 3입입니다.\n샐러드와 볶음용으로 활용하기 좋습니다." },
+      { id: "strawberry", category: "fruit", badge: "담양 산지", name: "담양 설향딸기 600g", price: 7900, stock: 18, sold: 2946, limit: 3, img: "https://images.pexels.com/photos/7946844/pexels-photo-7946844.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "박스 가득 담긴 향 진한 설향 딸기입니다.\n주문 확인 후 순차 배달됩니다." },
       { id: "tomato", category: "fruit", badge: "오늘 입고", name: "대추방울토마토 750g", price: 5900, stock: 25, sold: 9616, limit: 4, img: "https://images.pexels.com/photos/26950718/pexels-photo-26950718.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "상자에 진열된 싱싱한 방울토마토입니다.\n샐러드와 도시락 간식으로 좋아요." },
-      { id: "apple", category: "fruit", badge: "아삭", name: "가정용 혼합사과 2kg", price: 9900, stock: 14, sold: 1728, limit: 3, img: "https://images.pexels.com/photos/6097872/pexels-photo-6097872.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "박스 진열된 여러 품종의 사과를 담았습니다.\n아라동 한정 배달 상품입니다." },
+      { id: "apple", category: "fruit", badge: "아삭", name: "가정용 혼합사과 2kg", price: 9900, stock: 14, sold: 1728, limit: 3, img: "https://images.pexels.com/photos/6097872/pexels-photo-6097872.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "박스 진열된 여러 품종의 사과를 담았습니다.\n가정용으로 부담 없이 드시기 좋습니다." },
       { id: "orange", category: "fruit", badge: "고당도", name: "캘리포니아 오렌지 6과", price: 6900, stock: 16, sold: 1842, limit: 3, img: "https://images.pexels.com/photos/15722576/pexels-photo-15722576.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "수분감 좋은 오렌지 6과 묶음입니다.\n새콤달콤한 과일을 찾는 분께 추천합니다." },
       { id: "grape", category: "fruit", badge: "달콤", name: "씨없는 청포도 500g", price: 8900, stock: 12, sold: 1320, limit: 2, img: "https://images.pexels.com/photos/32665722/pexels-photo-32665722.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "알이 탱글한 포도 한 팩입니다.\n냉장 보관 후 차갑게 드시면 더 좋아요." },
       { id: "lettuce", category: "veg", badge: "쌈채소", name: "쌈채소 모둠 한 팩", price: 4500, stock: 22, sold: 1574, limit: 5, img: "https://images.pexels.com/photos/28768309/pexels-photo-28768309.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "고기와 함께 먹기 좋은 쌈채소 모둠입니다.\n싱싱한 잎만 골라 담았습니다." },
       { id: "cucumber", category: "veg", badge: "시원", name: "백오이 3입", price: 3500, stock: 28, sold: 2034, limit: 5, img: "https://images.pexels.com/photos/2329440/pexels-photo-2329440.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "무침과 샐러드에 좋은 백오이 3입입니다.\n단단하고 신선한 물량으로 준비했습니다." },
       { id: "carrot", category: "veg", badge: "국내산", name: "흙당근 1kg", price: 4200, stock: 19, sold: 1184, limit: 4, img: "https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "요리용으로 쓰기 좋은 국내산 흙당근입니다.\n세척 후 냉장 보관해주세요." },
-      { id: "zucchini", category: "veg", badge: "국내산", name: "애호박 2입", price: 3900, stock: 17, sold: 928, limit: 5, img: "https://images.pexels.com/photos/29560751/pexels-photo-29560751.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "찌개와 볶음에 쓰기 좋은 국내산 애호박입니다.\n표면이 단단한 물량으로 준비했습니다." },
-      { id: "paprika", category: "today", badge: "오늘특가", name: "파프리카 혼합 3입", price: 4900, stock: 13, sold: 1105, limit: 4, img: "https://images.pexels.com/photos/37100272/pexels-photo-37100272.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "빨강·노랑 파프리카 혼합 3입입니다.\n샐러드와 볶음용으로 활용하기 좋습니다." }
+      { id: "zucchini", category: "veg", badge: "국내산", name: "애호박 2입", price: 3900, stock: 17, sold: 928, limit: 5, img: "https://images.pexels.com/photos/29560751/pexels-photo-29560751.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop", desc: "찌개와 볶음에 쓰기 좋은 국내산 애호박입니다.\n표면이 단단한 물량으로 준비했습니다." }
     ];
 
     const cart = new Map();
@@ -646,11 +635,12 @@
                 <h2>${item.name}</h2>
                 <div class="price">가격: <b>${money(item.price)}</b></div>
                 <div class="stock">${item.stock}개 남았어요!</div>
-                <div class="meta">누적판매수량: ${item.sold.toLocaleString("ko-KR")}<br>아라동 한정 배달 가능</div>
+                <div class="meta">누적판매수량: ${item.sold.toLocaleString("ko-KR")}<br>${item.opensAt || "주문 가능"}</div>
               </div>
             </div>
             <div class="actions">
               <button class="detail-btn" type="button" data-detail="${item.id}">상세보기</button>
+              <button class="cart-add" type="button" data-add-cart="${item.id}">담기</button>
               <div class="stepper" aria-label="${item.name} 수량 선택">
                 <button type="button" data-minus="${item.id}" aria-label="수량 빼기">-</button>
                 <strong>${qty}개</strong>
@@ -692,18 +682,18 @@
         <div class="price">가격: <b>${money(item.price)}</b></div>
         <div class="stock">${item.stock}개 남았어요!</div>
         <p class="detail-copy">${item.desc}</p>
-        <button class="submit" type="button" data-add="${item.id}">담기</button>
+        <button class="submit" type="button" data-add-cart="${item.id}">장바구니 담기</button>
       `;
     }
 
-    function orderSheet() {
+    function cartSheet() {
       const items = [...cart.values()];
       const rows = items.length
         ? items.map((item) => `<div class="summary-line"><span>${item.name} × ${item.qty}</span><b>${money(item.price * item.qty)}</b></div>`).join("")
         : `<div class="summary-line"><span>선택한 상품이 없습니다</span><b>0원</b></div>`;
       return `
         <div class="sheet-head">
-          <h2>주문서 작성</h2>
+          <h2>장바구니</h2>
           <button class="close" type="button" data-close aria-label="닫기">×</button>
         </div>
         <div class="summary">
@@ -713,7 +703,17 @@
         <div class="field"><label for="name">고객명 *</label><input class="input" id="name" autocomplete="name" placeholder="이름을 입력하세요"></div>
         <div class="field"><label for="phone">전화번호 *</label><input class="input" id="phone" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000"></div>
         <div class="field"><label for="address">아라동 배달 주소 *</label><input class="input" id="address" autocomplete="street-address" placeholder="아라동 상세 주소를 입력하세요"></div>
+        <label class="check-row"><input type="checkbox"> 이름, 전화번호, 주소 저장하기</label>
+        <label class="check-row"><input type="checkbox" required> 아라동만 배달 가능함을 확인했습니다</label>
+        <div class="field">
+          <label>결제방법 *</label>
+          <div class="radio-row">
+            <label><input type="radio" name="pay" checked> 계좌이체</label>
+            <label><input type="radio" name="pay"> 현장결제</label>
+          </div>
+        </div>
         <div class="field"><label for="memo">요청사항</label><textarea class="input" id="memo" rows="3" placeholder="예: 문 앞에 놓아주세요"></textarea></div>
+        <label class="check-row"><input type="checkbox"> 요청사항 저장하기</label>
         <button class="submit" type="button" data-submit ${items.length ? "" : "disabled"}>주문 접수하기</button>
       `;
     }
@@ -765,9 +765,16 @@
       const plus = event.target.closest("[data-plus]");
       const minus = event.target.closest("[data-minus]");
       const detail = event.target.closest("[data-detail]");
+      const addCart = event.target.closest("[data-add-cart]");
       if (plus) changeQty(plus.dataset.plus, 1);
       if (minus) changeQty(minus.dataset.minus, -1);
       if (detail) openSheet(detailSheet(products.find((item) => item.id === detail.dataset.detail)));
+      if (addCart) {
+        changeQty(addCart.dataset.addCart, 1);
+        toast.textContent = "장바구니에 담았습니다.";
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 1600);
+      }
     });
 
     document.querySelectorAll(".category").forEach((tab) => {
@@ -786,24 +793,28 @@
 
     sheetBackdrop.addEventListener("click", (event) => {
       if (event.target === sheetBackdrop || event.target.closest("[data-close]")) closeSheet();
-      const add = event.target.closest("[data-add]");
-      if (add) {
-        changeQty(add.dataset.add, 1);
+      const addCart = event.target.closest("[data-add-cart]");
+      if (addCart) {
+        changeQty(addCart.dataset.addCart, 1);
         closeSheet();
+        toast.textContent = "장바구니에 담았습니다.";
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 1600);
       }
       if (event.target.closest("[data-submit]")) {
         closeSheet();
+        toast.textContent = "주문이 접수되었습니다.";
         toast.classList.add("show");
         setTimeout(() => toast.classList.remove("show"), 2200);
       }
     });
 
-    orderButton.addEventListener("click", () => openSheet(orderSheet()));
+    orderButton.addEventListener("click", () => openSheet(cartSheet()));
     document.querySelector("#searchButton").addEventListener("click", () => {
       openSheet(searchSheet());
       requestAnimationFrame(() => document.querySelector("#searchInput")?.focus());
     });
-    document.querySelector("#cartButton").addEventListener("click", () => openSheet(orderSheet()));
+    document.querySelector("#cartButton").addEventListener("click", () => openSheet(cartSheet()));
     document.querySelector("#historyButton").addEventListener("click", () => openSheet(historySheet()));
     document.querySelector("#storeButton").addEventListener("click", () => openSheet(storeSheet()));
     document.querySelector("#topButton").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
